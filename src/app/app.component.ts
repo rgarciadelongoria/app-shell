@@ -122,6 +122,22 @@ export class AppComponent implements OnInit {
   }
 
   /*
+  Statusbar methods
+  */
+
+  @HostListener(`window:${ShellEvents.SHELL_STATUSBAR_SET_STYLE}`, ['$event'])
+  async handleShellStatusbarSetStyle(event: any) {
+    const style: Style = event.detail?.style || Style.Default;
+    await StatusBar.setStyle({ style });
+  }
+
+  @HostListener(`window:${ShellEvents.SHELL_STATUSBAR_SET_BACKGROUND_COLOR}`, ['$event'])
+  async handleShellStatusbarSetBackgroundColor(event: any) {
+    const color = event.detail?.color || '#000000';
+    await StatusBar.setBackgroundColor({ color });
+  }
+
+  /*
   Network methods
   */
 
